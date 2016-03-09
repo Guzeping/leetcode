@@ -1,4 +1,5 @@
-/*
-!.gitignore
-!README
-!*.cpp
+Debug/*
+*.sdf
+*.sln
+*.vcxproj
+*.filters
