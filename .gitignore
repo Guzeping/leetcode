@@ -13,3 +13,4 @@ Debug/*
 *.suo
 *.exe
 /382_Odd_Even_Linked_List/Debug
+*.ilk
