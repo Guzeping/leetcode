@@ -3,3 +3,13 @@ Debug/*
 *.sln
 *.vcxproj
 *.filters
+*.tlog
+*.idb
+/283_Move_Zeros/Debug
+*.opensdf
+*.obj
+*.pdb
+*.log
+*.suo
+*.exe
+/382_Odd_Even_Linked_List/Debug
