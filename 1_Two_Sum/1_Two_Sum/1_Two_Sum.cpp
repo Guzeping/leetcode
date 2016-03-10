@@ -8,7 +8,7 @@ vector<int> twoSum(vector<int>& nums, int target)
 	vector<int> vnums = nums;
 	sort(vnums.begin(), vnums.end(),less<int>());
 	int first = 0, second = nums.size() - 1;
-	while (vnums[first] + vnums[second] != target) {
+	while (first<second) {
 		if (vnums[first] + vnums[second] > target)
 		{
 			second--;
@@ -19,12 +19,12 @@ vector<int> twoSum(vector<int>& nums, int target)
 		}
 		else 
 		{
-			int i=0, j = 0;
+			int i=0, j = vnums.size()-1;
 			while (nums[i] != vnums[first]) {
 				i++;
 			}
 			while (nums[j] != vnums[second]) {
-				j++;
+				j--;
 			}
 			vector<int> result;
 			result.push_back(i);
