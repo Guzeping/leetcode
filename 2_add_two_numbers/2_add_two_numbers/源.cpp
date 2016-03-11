@@ -30,96 +30,41 @@ ListNode * creat(int n) {
 }
 
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-	if (!l1)
-		return l2;
-	if (!l2)
-		return l1;
-
-	ListNode  *result = NULL, *end, *p, *p1 = l1, *p2 = l2;
-	p = new ListNode(0);
-	result = p;
-	end = p;
-	int carry = 0;
-	while (p1 != NULL && p2 != NULL) {
-		p = new ListNode(0);
-		if (p1->val + p2->val + carry >= 10) {
-			p->val = p1->val + p2->val + carry - 10;
-			carry = 1;
-		}
-		else
-		{
-			p->val = p1->val + p2->val + carry;
-			carry = 0;
-		}
-		p1 = p1->next;
-		p2 = p2->next;
-		end->next = p;
-		end = end->next;
-	}
-	result = result->next;
-	if (p1 == NULL &&p2 == NULL) {
-		if (carry == 0) {
-			return result;
-		}
-		else
-		{
-			p = new ListNode(1);
-			end->next=p;
-			end = end->next;
-			return result;
-		}
-
-	}
-	if (p1 == NULL) {
-		while (carry != 0) {
-			if (p2 == NULL) {
-				p = new ListNode(1);
-				end->next = p;
-				return result;
-			}
-			p = new ListNode(0);
-			if (p2->val + carry >= 10) {
-				p->val = p2->val + carry - 10;
-				carry = 1;
-			}
-			else
-			{
-				p->val = p2->val + carry;
-				carry = 0;
-			}
-			p2 = p2->next;
-			end->next = p;
-			end = end->next;
-		}
-		end->next = p2;
-		return result;
-	}
-	if (p2 == NULL) {
-		while (carry != 0) {
-			if (p1 == NULL) {
-				p = new ListNode(1);
-				end->next = p;
-				return result;
-			}
-			p = new ListNode(0);
-			if (p1->val + carry >= 10) {
-				p->val = p1->val + carry - 10;
-				carry = 1;
-			}
-			else
-			{
-				p->val = p1->val + carry;
-				carry = 0;
-			}
-			p1 = p1->next;
-			end->next = p;
-			end = end->next;
-		}
-		end->next = p1;
-		return result;
-	}
+	return help(l1, l2, 0);
 }
 
+ListNode* help(ListNode *l1, ListNode *l2,int add) {
+
+	if ( l1 == NULL && l2 == NULL) {
+		if (add == 0) {
+			return NULL;
+		}
+		else
+		{
+			ListNode * p = new ListNode(add);
+			return p;
+		}
+	}
+	else {
+		int sum = add;
+		if (l1 != NULL) {
+			sum += l1->val;
+			l1 = l1->next;
+		}
+		if (l2 != NULL) {
+			sum += l2->val;
+			l2 = l2->next;
+		}
+		add = sum / 10;
+		sum = sum %10;
+			
+		ListNode *p = new ListNode(sum);
+
+		p->next = help(l1, l2, add);
+		return p;
+	}
+
+}
 int main() {
 	int m=0, n=0;
 	scanf_s("%d %d", &m, &n, 2);
